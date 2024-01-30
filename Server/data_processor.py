@@ -1,0 +1,1 @@
+#here will be logic of interpritation our data
