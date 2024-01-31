@@ -1,6 +1,6 @@
 
 .dashboard__title{
-
+    margin-top: 1.2rem;
     margin-bottom:2.7rem;
     color: #131313;
     font-family: "Open Sans", sans-serif;
@@ -8,6 +8,10 @@
     font-style: normal;
     font-weight: 700;
     line-height: 110%; /* 1.925rem */
+}
+
+.dashboard__title:nth-child(1){
+    margin-top: 0;
 }
 
 .dashboard__content{

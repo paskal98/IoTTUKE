@@ -2,12 +2,12 @@ import {useEffect, useState} from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import Header from "./header/Header/Header.jsx";
+import Header from "./components/header/Header/Header.jsx";
 import { Dialog } from 'primereact/dialog';
 import { Button } from 'primereact/button';
 import DevicesList from "./components/devices/DevicesList.jsx";
 import {menu_items} from "./data/menu.js";
-import Dashboard from "./dashboard/Dasboard/Dashboard.jsx";
+import Dashboard from "./components/dashboard/Dasboard/Dashboard.jsx";
 
 
 

@@ -1,0 +1,8 @@
+.total{
+    border-radius: 0.5rem;
+    background: #FFF;
+
+    padding: 1.625rem 1.2rem;
+
+    height: calc(8.625rem + 1.5rem)
+}

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import styles from './Menu.module.css';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faBell, faHome, faLaptop} from '@fortawesome/free-solid-svg-icons'
-import {menu_items} from "../../data/menu.js";
+import {menu_items} from "../../../data/menu.js";
 
 function Menu({onPageChange, page}) {
 

@@ -35,6 +35,10 @@ export const dataPayload = {
         week: "-",
         month: "-"
     },
+    total:{
+        usageElectricity: '-',
+        moneySpent: '-'
+    },
     computers:[
         {
             name: '-',
