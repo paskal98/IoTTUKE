@@ -17,15 +17,15 @@ function Visitors({data}) {
     return (
     <div className={styles.visitors}>
 
-        <Row label={"Visitors Today:"}
+        <Row label={"Item Today:"}
              value={!value ? "-" : value.today}
              type={"ppl"} />
 
-        <Row label={"Visitors Week:"}
+        <Row label={"Item Week:"}
              value={!value ? "-" : value.week}
              type={"ppl"} />
 
-        <Row label={"Visitors Month:"}
+        <Row label={"Item Month:"}
              value={!value ? "-" : value.month}
              type={"ppl"} />
 

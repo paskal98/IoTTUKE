@@ -34,5 +34,12 @@ export const dataPayload = {
         today: "-",
         week: "-",
         month: "-"
-    }
+    },
+    computers:[
+        {
+            name: '-',
+            usageTime: '-',
+            usageLast: '-'
+        }
+    ]
 }

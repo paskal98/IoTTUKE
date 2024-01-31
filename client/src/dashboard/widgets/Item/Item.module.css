@@ -1,0 +1,28 @@
+.item{
+    border-radius: 0.5rem;
+    background: #FFF;
+    height: calc(10.5625rem + 1.5rem)
+}
+
+.item__header{
+    width: 18.5rem;
+    padding: 0.75rem 0rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 0.5rem 0.5rem 0rem 0rem;
+    border-bottom: 1px solid rgba(19, 19, 19, 0.15);
+
+    color: #131313;
+    font-family: "Open Sans", sans-serif;
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 110%; /* 1.2375rem */
+    text-transform: uppercase;
+}
+
+.item__content{
+    padding: 1.625rem 1.2rem
+}
