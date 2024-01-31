@@ -2,6 +2,7 @@ import threading
 from mqtt_client import create_mqtt_client
 from web_server import app
 
+# vitally
 def run_mqtt():
     
     mqtt_client = create_mqtt_client()
