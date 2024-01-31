@@ -1,0 +1,19 @@
+
+.dashboard__title{
+
+    margin-bottom:2.7rem;
+    color: #131313;
+    font-family: "Open Sans", sans-serif;
+    font-size: 1.75rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 110%; /* 1.925rem */
+}
+
+.dashboard__content{
+
+    display:flex;
+    flex-wrap: wrap;
+    gap: 30px;
+
+}

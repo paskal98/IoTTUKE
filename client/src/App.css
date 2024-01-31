@@ -1,0 +1,38 @@
+
+
+.card {
+  padding: 2em;
+}
+.view__container{
+  padding: 0 1.25rem;
+  margin: 0 auto;
+  padding-bottom: 4rem;
+  margin-top:2.5rem;
+}
+.read-the-docs {
+  color: #888;
+}
+.p-datatable > .p-datatable-wrapper {
+  overflow: auto;
+  min-height: 370px;
+}
+.form-demo .card {
+  min-width: 450px;
+}
+.form-demo .card form {
+  margin-top: 2rem;
+}
+.form-demo .card .field {
+  margin-bottom: 2rem;
+}
+@media screen and (max-width: 960px) {
+  .form-demo .card {
+    width: 80%;
+  }
+}
+@media screen and (max-width: 640px) {
+  .form-demo .card {
+    width: 100%;
+    min-width: 0;
+  }
+}

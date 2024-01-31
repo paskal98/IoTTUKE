@@ -1,0 +1,20 @@
+
+.device__list__top__container{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:30px
+}
+.device__header__text{
+    display: flex;
+    left: 150px;
+    font-size: 32px;
+    font-weight: 500;
+}
+.add__device__success__msg__container{
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}

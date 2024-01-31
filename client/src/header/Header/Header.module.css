@@ -1,0 +1,45 @@
+.header{
+    width:calc(100vw);
+    padding: 1.06rem 1.25rem;
+    background-color: #131313;
+    display:flex;
+    justify-content: space-between;
+    align-items:center;
+}
+
+.logo{
+    min-width: 2.9375rem;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.logo__name{
+    color: #F6C517;
+    font-family: "Open Sans", sans-serif;
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 110%;
+    margin-bottom: 0.3rem;
+}
+
+.logo_additional{
+    color: #bebdbd;
+    font-family: "Open Sans", sans-serif;
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 110%; 
+}
+
+.logout{
+    display:flex;
+    justify-content: center;
+    align-items:center;
+    width: 2rem;
+    height: 2rem;
+    color: #FDFDFD;
+    font-size: 1.3rem;
+    cursor: pointer;
+}
