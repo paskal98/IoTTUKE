@@ -20,3 +20,19 @@ export const listOfDevices =[
     { name: "Robot Vacuum", serialNumber: "RV3599S", battery: "35", workingTime: "16 hours", activity: "1 week ago" },
     { name: "Baby Monitor", serialNumber: "BM4700T", battery: "80", workingTime: "5 hours", activity: "1 month ago" }
 ]
+
+export const dataPayload = {
+    air : {
+        temperature: {
+            inside: "-",
+            outside: "-"
+        },
+        humidity: "-",
+        comfortRate: "-"
+    },
+    visitors : {
+        today: "-",
+        week: "-",
+        month: "-"
+    }
+}

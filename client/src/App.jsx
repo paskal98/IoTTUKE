@@ -35,9 +35,6 @@ function App() {
 
     }
 
-
-
-
     useEffect(() => {
         const eventSource = new EventSource("http://localhost:4001/rates");
 
