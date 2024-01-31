@@ -14,24 +14,12 @@ const val = {
 
 function Temperature({data}) {
 
-
-    const [value, setValue] = useState(undefined)
+    const [value, setValue] = useState(null)
 
     useEffect(() => {
-
-        console.log(data)
-
-        if (data===undefined || !data || data.length===0)
-            setValue(undefined);
-        else {
-
-            setValue(data);
-        }
+        setValue(data);
     }, [data]);
     
-
-
-
 
 
     return (
@@ -40,7 +28,7 @@ function Temperature({data}) {
       <div className={styles.temperature__item}>
         <div className={styles.temperature__item__label}>Temperature Inside:</div>
         <div className={styles.temperature__item__data}>
-          <div className={styles.temperature__item__data__value}>{value===undefined ? "-" : value.air.temperature.inside}</div>
+          <div className={styles.temperature__item__data__value}>{!value ? "-" : value.air.temperature.inside}</div>
           <div className={styles.temperature__item__data__type}>°C</div>
         </div>
       </div>
@@ -48,7 +36,7 @@ function Temperature({data}) {
         <div className={styles.temperature__item}>
             <div className={styles.temperature__item__label}>Temperature Outside:</div>
             <div className={styles.temperature__item__data}>
-                <div className={styles.temperature__item__data__value}>{value===undefined ? "-" : value.air.temperature.outside}</div>
+                <div className={styles.temperature__item__data__value}>{!value ? "-" : value.air.temperature.outside}</div>
                 <div className={styles.temperature__item__data__type}>°C</div>
             </div>
         </div>
@@ -56,7 +44,7 @@ function Temperature({data}) {
         <div className={styles.temperature__item}>
             <div className={styles.temperature__item__label}>Humidity:</div>
             <div className={styles.temperature__item__data}>
-                <div className={styles.temperature__item__data__value}>{value===undefined ? "-" : value.air.humidity}</div>
+                <div className={styles.temperature__item__data__value}>{!value ? "-" : value.air.humidity}</div>
                 <div className={styles.temperature__item__data__type}>%</div>
             </div>
         </div>
@@ -64,7 +52,7 @@ function Temperature({data}) {
         <div className={styles.temperature__item}>
             <div className={styles.temperature__item__label}>Comfort rate:</div>
             <div className={styles.temperature__item__data}>
-                <div className={styles.temperature__item__data__value}>{value===undefined ? "-" : value.air.comfortRate}</div>
+                <div className={styles.temperature__item__data__value}>{!value ? "-" : value.air.comfortRate}</div>
             </div>
         </div>
 

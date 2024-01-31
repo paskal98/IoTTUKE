@@ -16,7 +16,16 @@ function App() {
     const [page, setPage] = useState(menu_items[0])
 
     const [payload, setPayload] = useState([])
-    const [receivedData, setReceivedData] = useState([])
+    const [receivedData, setReceivedData] = useState({
+        air: {
+            temperature : {
+                inside : "-",
+                outside: "-"
+            },
+            humidity: "-",
+            comfortRate: "-"
+        }
+    });
 
     function handleOnPageChange(page){
         setPage(page)
@@ -27,23 +36,13 @@ function App() {
     }
 
 
-    const [test, setTest] = useState({
-        air: {
-            temperature : {
-                inside : 28,
-                outside: 36
-            },
-            humidity: 34,
-            comfortRate: "Low"
-        }
-    });
+
 
     useEffect(() => {
         const eventSource = new EventSource("http://localhost:4001/rates");
 
         eventSource.onmessage = (event) => {
             const air = JSON.parse(event.data);
-            setTest({ ...air });
             setReceivedData({ ...air })
         };
 
