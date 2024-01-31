@@ -11,7 +11,6 @@ function Temperature({data}) {
 
     useEffect(() => {
         setValue(data);
-        console.log(data)
     }, [data]);
     
 

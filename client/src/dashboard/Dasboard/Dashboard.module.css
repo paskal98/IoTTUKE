@@ -17,3 +17,10 @@
     gap: 30px;
 
 }
+
+.dashboard__content_scrollable{
+    display:flex;
+    gap: 30px;
+    flex-wrap: wrap;
+
+}

@@ -1,0 +1,100 @@
+.device{
+    height: 10.25rem;
+    border-radius: 0.5rem;
+    background: #FFF;
+    display: flex;
+}
+
+
+.device__icon{
+    width: 9.9375rem;
+    height: 10.25rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.device__icon__png{
+    width: 5.75rem;
+    height: 5.75rem;
+}
+
+.device__content{
+    width: 11.9375rem;
+    padding: 0.69rem 0rem;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.device__wrap{
+    margin: 0 auto;
+    display: flex;
+    flex-direction:column;
+    justify-content: space-between;
+    gap: 1.56rem;
+}
+
+.device__content__info{
+
+}
+
+.device__content__info__title{
+    color: #000;
+    font-family: "Open Sans", sans-serif;
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 110%; /* 1.2375rem */
+}
+
+.device__content__info__undertitle{
+    color: #898787;
+    font-family: "Open Sans", sans-serif;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 110%; /* 0.9625rem */
+}
+
+.device__content__switch{
+    min-width:8.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.device__content__switch__button{}
+
+.device__content__switch__delim{
+    width: 0.25rem;
+    height: 0.25rem;
+    border-radius: 6.25rem;
+    background: #131313;
+}
+
+.device__content__switch__active{
+    color: #898787;
+    font-family: "Open Sans", sans-serif;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 110%; /* 0.9625rem */
+    margin-left:0.5rem
+}
+
+span{
+    color: #898787;
+}
+
+.device__content__interaction{
+    color: #131313;
+    font-family: "Open Sans", sans-serif;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 110%; /* 0.9625rem */
+    text-transform: capitalize;
+}

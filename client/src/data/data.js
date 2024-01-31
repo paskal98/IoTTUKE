@@ -39,7 +39,40 @@ export const dataPayload = {
         {
             name: '-',
             usageTime: '-',
-            usageLast: '-'
+            usageLast: '-',
+            usageElectricity: '-',
+            moneySpent: '-'
+        }
+    ],
+    switchables:[
+        {
+            type: '-',
+            name: '-',
+            identity: '-',
+            usageTime: '-',
+            lastActivity: '-'
+        }
+    ],
+    settings:[
+        {
+            title:"-",
+            type: 'scenario',
+            options:[
+                {
+                    id: 0,
+                    name:"-"
+                }
+            ]
+        },
+        {
+            title:"Alerts",
+            type: 'alert',
+            options:[
+                {
+                    id: 0,
+                    name:"-"
+                }
+            ]
         }
     ]
 }

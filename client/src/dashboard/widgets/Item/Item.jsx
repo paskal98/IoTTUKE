@@ -26,6 +26,14 @@ function Item({data}) {
             <Row label={"Last Start:"}
                  value={!value ? "-" : value.usageLast}
                  type={"h ago"} />
+
+            <Row label={"Electricity Used:"}
+                 value={!value ? "-" : value.usageElectricity}
+                 type={"kWh"} />
+
+            <Row label={"Money Spent:"}
+                 value={!value ? "-" : value.moneySpent}
+                 type={"$"} />
         </div>
 
     </div>
