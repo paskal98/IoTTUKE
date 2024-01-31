@@ -60,7 +60,7 @@ export const dataPayload = {
     settings:[
         {
             title:"-",
-            type: 'scenario',
+            type: '-',
             options:[
                 {
                     id: 0,
@@ -68,15 +68,5 @@ export const dataPayload = {
                 }
             ]
         },
-        {
-            title:"Alerts",
-            type: 'alert',
-            options:[
-                {
-                    id: 0,
-                    name:"-"
-                }
-            ]
-        }
     ]
 }
