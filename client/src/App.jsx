@@ -28,17 +28,23 @@ function App() {
 
 
     const [test, setTest] = useState({
-        stock1Rate: null,
-        stock2Rate: null,
+        air: {
+            temperature : {
+                inside : 28,
+                outside: 36
+            },
+            humidity: 34,
+            comfortRate: "Low"
+        }
     });
 
     useEffect(() => {
         const eventSource = new EventSource("http://localhost:4001/rates");
 
         eventSource.onmessage = (event) => {
-            const stockData = JSON.parse(event.data);
-            setTest({ ...stockData });
-            setReceivedData(stockData.stock1Rate)
+            const air = JSON.parse(event.data);
+            setTest({ ...air });
+            setReceivedData({ ...air })
         };
 
         return () => eventSource.close();
