@@ -1,5 +1,5 @@
 .header{
-    width:calc(100vw - 1.039rem);
+    /*width:calc(100vw);*/
     padding: 1.06rem 1.25rem;
     background-color: #131313;
     display:flex;

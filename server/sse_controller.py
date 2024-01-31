@@ -1,3 +1,5 @@
+from random import randint
+
 from flask import Flask, Response, jsonify
 import json
 import time
@@ -100,6 +102,9 @@ def sse_stream():
         json_data = json.dumps(data)
         yield f"data:{json_data}\n\n"
         time.sleep(3)
+        data["air"]["humidity"] = randint(1, 100)
+        data["air"]["temperature"]["inside"] = randint(18, 25)
+        data["air"]["temperature"]["outside"] = randint(-10, 10)
 
 def register_sse_routes(app):
     CORS(app)

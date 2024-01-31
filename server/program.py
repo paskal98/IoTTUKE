@@ -11,4 +11,4 @@ def run_mqtt():
 if __name__ == '__main__':
     mqtt_thread = threading.Thread(target=run_mqtt)
     mqtt_thread.start()
-    app.run(debug=True, threaded=True)
+    app.run(debug=True, threaded=True, port=4001)

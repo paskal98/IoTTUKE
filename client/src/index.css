@@ -26,4 +26,6 @@ html{
 }
 
 #root{
+      all: unset;
+    display: revert;
 }
