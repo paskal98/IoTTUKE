@@ -6,17 +6,14 @@ SLACK_BOT_API='xoxb-6563040973363-6563214400386-BY6SwsxmpsRhfFZyQnwWI00E'
 
 def get_outside_temperature(city_name):
     base_url = "http://api.openweathermap.org/data/2.5/weather"
-    
-    # Make sure to replace 'YOUR_API_KEY' with your actual API key
     params = {
         'q': city_name,
         'appid': WEATHER_API,
-        'units': 'metric',  # Use 'imperial' for Fahrenheit
+        'units': 'metric',
     }
     try:
         response = requests.get(base_url, params=params)
         data = response.json()
-
         if response.status_code == 200:
             temperature = data['main']['temp']
             return temperature
