@@ -4,6 +4,18 @@ import queue
 from mongo import process_data
 from attributes import *
 from mongo import get_socket_week_from_db
+from datetime import datetime, time
+
+def is_more_than_6pm():
+    current_time = datetime.now().time()
+    six_pm = time(18, 0)
+    return current_time > six_pm
+
+def is_between_6am_and_6pm():
+    current_time = datetime.now().time()
+    six_am = time(6, 0)
+    six_pm = time(18, 0)
+    return six_am <= current_time <= six_pm
 
 # This queue will hold MQTT messages for SSE to consume
 message_queue = queue.Queue()
@@ -25,10 +37,12 @@ def on_message(client, userdata, msg):
         process_data("Socket", payload_dict)
     elif "door" in msg.topic:
         global DOOR_CLOSED
-        if payload_dict.get('contact') == True:
+        if payload_dict.get('contact') == True and is_more_than_6pm() and EVENING_TURN_OFF:
             DOOR_CLOSED = True
-        else:
+            #turn off electricity
+        elif payload_dict.get('contact') == False and is_between_6am_and_6pm() and MORNING_TURN_ON:
             DOOR_CLOSED = False
+            #turn on electricity
     elif "window" in msg.topic:
         global WINDOW_CLOSED
         if payload_dict.get('contact') == True:
