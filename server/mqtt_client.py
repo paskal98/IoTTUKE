@@ -7,7 +7,7 @@ message_queue = queue.Queue()
 
 def on_connect(client, userdata, flags, rc):
     print("Connected with result code " + str(rc))
-    #client.subscribe("gateway/zigbee/socket")
+    client.subscribe("gateway/zigbee/socket")
     client.subscribe("gateway/zigbee/door sensor")
     client.subscribe("gateway/zigbee/temperature_humidity")
 
