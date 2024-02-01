@@ -13,7 +13,6 @@ client = MongoClient(uri, server_api=ServerApi('1'))
 database = client.get_database("MQTTDB")
 
 def process_data(collectionName, payload):
-    collection = database.get_collection(collectionName)
     now = datetime.now()
     try:
         if collectionName == "Temperature":
@@ -29,14 +28,16 @@ def process_data(collectionName, payload):
                 "timestamp": int(now.timestamp()),
                 "datetime": now.strftime(MONGO_DATETIME_FORMAT),
             }
-            collection.insert_one(document)
+            database.get_collection(collectionName).insert_one(document)
         elif collectionName == "Socket":
             #get values from payload
-            update_or_insert_socket() 
+            consumed_energy = payload.get('energy')
+            consumed_money = consumed_energy * 0.1892 #TODO update tariff via API
+            update_or_insert_socket(consumed_energy, consumed_money) 
     except Exception as ex:
         print(ex)
 
-def update_or_insert_socket(online_time_increment):
+def update_or_insert_socket(new_consumed_energy, new_consumed_money):
     collection = database.get_collection("Socket")
     current_date_str = datetime.now().strftime(MONGO_DATE_FORMAT)
     # Define the query to find a document with the current date
@@ -46,15 +47,29 @@ def update_or_insert_socket(online_time_increment):
     if existing_document:
         # If a document with the current date exists, update it
         print(f"Updating existing document for date: {current_date_str}")
-        new_online_time = existing_document["online_time"] + online_time_increment
-        collection.update_one({"_id": existing_document["_id"]}, {"$set": {"online_time": new_online_time}})
+        collection.update_one(
+            {"_id": existing_document["_id"]}, 
+            {"$set": {"consumed_energy": new_consumed_energy, "consumed_money": new_consumed_money}}
+        )
     else:
         # If there is no document with the current date, insert a new one
-        print(f"Inserting new document for date: {current_date_str}")
+        print(f"Inserting new document for current date: {current_date_str}")
         new_document = {
-            "online_time": online_time_increment,
-            "consumed_volts": 0,  # Modify as needed
-            "consumed_money": 0,  # Modify as needed
+            "consumed_energy": new_consumed_energy,
+            "consumed_money": new_consumed_money,
             "date": current_date_str
         }
         collection.insert_one(new_document)
+
+def get_inside_temp_from_db():
+    collection = database.get_collection("Temperature")
+    query = {}
+    # Sort the documents by date in descending order to get the latest one first
+    sort_order = [("date", -1)]
+    latest_document = collection.find_one(query, sort=sort_order)
+    if latest_document:
+        parameter_value = latest_document.get("inside")
+        if parameter_value is not None:
+            return parameter_value
+        else:
+            return 0

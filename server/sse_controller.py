@@ -4,6 +4,7 @@ from flask import Flask, Response, jsonify
 import json
 import time
 from threading import Thread
+from services import *
 
 from flask_cors import CORS
 
@@ -13,7 +14,7 @@ data = {
     "air": {
         "temperature": {
             "inside": 17,
-            "outside": -30
+            "outside": -3
         },
         "humidity": 20,
         "comfortRate": "Low"
