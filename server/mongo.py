@@ -1,8 +1,8 @@
-import json
-from services import *
 from datetime import datetime
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
+
+from server.services import get_outside_temperature, monitor_temperature_condition
 
 uri = "mongodb+srv://danilbond49:maker@cluster0.6h6gsaf.mongodb.net/?retryWrites=true&w=majority"
 MONGO_DATETIME_FORMAT = "%d/%m/%Y %H:%M:%S"
