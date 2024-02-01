@@ -47,3 +47,7 @@ def set_comfort_temperature_service(comfort_temperature):
     COMFORT_TEMPERATURE = comfort_temperature
     print(COMFORT_TEMPERATURE)
     send_slack_notification("Clouse window")
+
+
+def monitor_temperature_condition():
+    return None

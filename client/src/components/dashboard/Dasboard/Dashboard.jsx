@@ -10,7 +10,7 @@ import Setting from "../settings/Setting/Setting.jsx";
 import Total from "../widgets/Total/Total.jsx";
 
 
-function Dashboard({onPayload, data}) {
+function Dashboard({onScenario,onPayload, data}) {
 
 
     const [temperature, setTemperature] = useState(dataPayload.air)
@@ -100,7 +100,7 @@ function Dashboard({onPayload, data}) {
             {
                 settings.map((setting,index) => {
                     return (
-                        <Setting key={index} data={setting}/>
+                        <Setting key={index} data={setting} onScenario={onScenario}/>
                     )
                 })
             }

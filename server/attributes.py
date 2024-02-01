@@ -13,5 +13,94 @@ LATEST_TEMPERATURE = 0
 DOOR_CLOSED = True
 WINDOW_CLOSED = True
 
-MORNING_TURN_ON = False
-EVENING_TURN_OFF = False
+MORNING_TURN_ON = True
+EVENING_TURN_OFF = True
+
+data = {
+    "air": {
+        "temperature": {
+            "inside": None,
+            "outside": None
+        },
+        "humidity": None,
+        "comfortRate": "Low"
+    },
+    "visitors": {
+        "today": 23,
+        "week": 213,
+        "month": 677
+    },
+    "total": {
+        "usageElectricity": 0.0,
+        "moneySpent": 0.0
+    },
+    "computers": [
+        {
+            "name": 'PC1',
+            "usageTime": 3.4,
+            "usageLast": 0,
+            "usageElectricity": None,
+            "moneySpent": None
+        }
+    ],
+    "switchables": [
+        {
+            "type": 'socket',
+            "name": 'Smart Socket',
+            "identity": 1,
+            "usageTime": "0min",
+            "lastActivity": "0min",
+            "isActive": True
+        },
+        {
+            "type": 'lamp',
+            "name": 'Smart Lightning',
+            "identity": 2,
+            "usageTime": '0min',
+            "lastActivity": '0min',
+            "isActive": True
+        }
+    ],
+
+    "settings": [
+        {
+            "title": "Scenarios",
+            "type": 'scenario',
+            "options": [
+                {
+                    "id": 1,
+                    "name": "Turn off electricity",
+                    "isActive": True
+                },
+                {
+                    "id": 2,
+                    "name": "Turn on electricity",
+                    "isActive": True
+                },
+                {
+                    "id": 3,
+                    "name": "Scheduled electricity",
+                    "isActive": False
+                }
+            ]
+        },
+        {
+            "title": "Alerts",
+            "type": 'alert',
+            "options": [
+                {
+                    "id": 1,
+                    "name": "Door"
+                },
+                {
+                    "id": 2,
+                    "name": "Server"
+                },
+                {
+                    "id": 3,
+                    "name": "Weather"
+                }
+            ]
+        }
+    ]
+}

@@ -31,6 +31,33 @@ function App() {
         setPage(page)
     }
 
+    async function handleScenario(scenario){
+        console.log(scenario);
+
+        var point = "morning"
+        if (scenario[0]===1){
+            point="evening"
+        }
+
+
+        const url = new URL(`http://localhost:4001/${point}`);
+
+        try {
+
+            const response = await fetch(url);
+
+            if (!response.ok) {
+                throw new Error(`Request failed with status: ${response.status}`);
+            }
+
+            const data = await response.json();
+
+            console.log(data);
+        } catch (error) {
+            console.error("Error fetching data from /evening:", error.message);
+        }
+    }
+
     async function handlePayload(payload) {
         console.log(payload);
 
@@ -75,7 +102,7 @@ function App() {
         <Header onPageChange={handleOnPageChange} page={page}/>
         <div className="view__container">
             {/*<DevicesList />*/}
-            <Dashboard onPayload={handlePayload} data={receivedData}/>
+            <Dashboard onPayload={handlePayload} data={receivedData} onScenario={handleScenario}/>
 
         </div>
 

@@ -7,7 +7,8 @@ from flask import Flask, Response, request, jsonify
 from flask_cors import CORS
 
 from mongo import process_data, get_socket_week_from_db
-from mqtt_client import message_queue, run_mqtt_client
+from mqtt_client import message_queue, run_mqtt_client, is_more_than_6pm, is_between_6am_and_6pm
+from attributes import *
 from services import get_outside_temperature
 from temperature_controller import register_temperature_routes
 
@@ -24,90 +25,7 @@ register_temperature_routes(app)
 
 start_time = time.time()
 
-data = {
-    "air": {
-        "temperature": {
-            "inside": None,
-            "outside": None
-        },
-        "humidity": None,
-        "comfortRate": "Low"
-    },
-    "visitors": {
-        "today": 23,
-        "week": 213,
-        "month": 677
-    },
-    "total": {
-        "usageElectricity": 0.0,
-        "moneySpent": 0.0
-    },
-    "computers": [
-        {
-            "name": 'PC1',
-            "usageTime": 3.4,
-            "usageLast": 0,
-            "usageElectricity": None,
-            "moneySpent": None
-        }
-    ],
-    "switchables": [
-        {
-            "type": 'socket',
-            "name": 'Smart Socket',
-            "identity": 1,
-            "usageTime": "0min",
-            "lastActivity": "0min",
-            "isActive": True
-        },
-        {
-            "type": 'lamp',
-            "name": 'Smart Lightning',
-            "identity": 2,
-            "usageTime": '0min',
-            "lastActivity": '0min',
-            "isActive": True
-        }
-    ],
-    "settings": [
-        {
-            "title": "Scenarios",
-            "type": 'scenario',
-            "options": [
-                {
-                    "id": 1,
-                    "name": "Turn off electricity"
-                },
-                {
-                    "id": 2,
-                    "name": "Turn on electricity"
-                },
-                {
-                    "id": 3,
-                    "name": "Scheduled electricity"
-                }
-            ]
-        },
-        {
-            "title": "Alerts",
-            "type": 'alert',
-            "options": [
-                {
-                    "id": 1,
-                    "name": "Door"
-                },
-                {
-                    "id": 2,
-                    "name": "Server"
-                },
-                {
-                    "id": 3,
-                    "name": "Weather"
-                }
-            ]
-        }
-    ]
-}
+global data
 
 def get_working_time():
     elapsed_time = time.time() - start_time
@@ -126,6 +44,18 @@ def sse_stream():
             payload = json.loads(payloadRaw)  # Deserialize payload if it's a JSON string
 
             data["air"]["temperature"]["outside"] = get_outside_temperature('Kosice')
+            #
+            # if topic == "gateway/zigbee/door sensor":
+            #     if is_more_than_6pm() and EVENING_TURN_OFF:
+            #         print("asd")
+            #         data["switchables"][0]["isActive"] = False
+            #         payload = {"state_l1": "OFF", "state_l2": "OFF"}
+            #         mqtt_publish("gateway/zigbee/socket/set", payload)
+            #     if is_between_6am_and_6pm() and MORNING_TURN_ON:
+            #         print("asdasd")
+            #         data["switchables"][0]["isActive"] = True
+            #         payload = {"state_l1": "ON", "state_l2": "ON"}
+            #         mqtt_publish("gateway/zigbee/socket/set", payload)
 
             if topic == "gateway/zigbee/temperature_humidity":
                 data["air"]["temperature"]["inside"] = payload["temperature"]
@@ -162,9 +92,26 @@ def stream():
 def stream2():
     return get_socket_week_from_db()
 
+@app.route('/evening', methods=['GET'])
+def evening():
+    global EVENING_TURN_OFF
+    EVENING_TURN_OFF = not EVENING_TURN_OFF
+    print(EVENING_TURN_OFF)
+    data["settings"][0]["options"][0]["isActive"] = EVENING_TURN_OFF
+    return jsonify({"message": "Scenario evening updated"}), 200
+
+@app.route('/morning', methods=['GET'])
+def morning():
+    global MORNING_TURN_ON
+    MORNING_TURN_ON = not MORNING_TURN_ON
+    print(EVENING_TURN_OFF)
+    data["settings"][0]["options"][1]["isActive"] = MORNING_TURN_ON
+    return jsonify({"message": "Scenario morning updated"}), 200
 
 @app.route('/switch', methods=['GET'])
 def switch():
+
+    # identity = request.args.get('identity')
     identity = 1
     if identity:
         for device in data["switchables"]:
@@ -176,6 +123,7 @@ def switch():
                 else:
                     state = "ON"
                     device["isActive"] = True
+
 
                 device["lastActivity"] = "0"
                 payload = {"state_l1": state, "state_l2": state}
@@ -189,6 +137,7 @@ def switch():
 
 
 if __name__ == '__main__':
+
     # Run MQTT client in its own thread
     mqtt_thread = threading.Thread(target=run_mqtt_client)
     mqtt_thread.start()

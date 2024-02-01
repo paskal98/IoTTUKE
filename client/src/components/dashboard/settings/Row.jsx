@@ -8,6 +8,13 @@ import {Switch} from "@mui/material";
 function Row({value, onChange,type}) {
 
     const [checked, setChecked] = useState(false);
+    const [data, setData] = useState(false);
+
+    useEffect(() => {
+        console.log(value)
+        setData(value)
+        setChecked(value.isActive)
+    }, [value]);
 
     function handleChange(checked) {
         setChecked(checked);
@@ -17,7 +24,7 @@ function Row({value, onChange,type}) {
     return (
 
         <div className={styles.row}>
-            <div className={styles.row__label}>{!value ? '-' : value.name}</div>
+            <div className={styles.row__label}>{!value ? '-' : data.name}</div>
             <Switch checked={checked} onChange={() => handleChange(!checked)}/>
         </div>
 

@@ -4,7 +4,7 @@ import Row from "../Row.jsx";
 
 
 
-function Setting({data}) {
+function Setting({onScenario,data}) {
 
     const [value, setValue] = useState(null)
 
@@ -14,7 +14,7 @@ function Setting({data}) {
     }, [data]);
 
     function handleChange(change){
-        console.log(change)
+        onScenario(change)
     }
 
     return (

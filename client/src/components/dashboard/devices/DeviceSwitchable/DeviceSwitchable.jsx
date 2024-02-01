@@ -17,7 +17,7 @@ function DeviceSwitchable({data,onChange}) {
 
     function handleChange(checked){
         setChecked(checked)
-        onChange(checked,value.identity)
+        onChange([checked,value.identity])
     }
 
 
