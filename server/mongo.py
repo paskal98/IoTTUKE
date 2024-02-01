@@ -17,6 +17,7 @@ def process_data(collectionName, payload):
     try:
         if collectionName == "Temperature":
             insideTemp = payload.get('temperature')
+            humidity = payload.get('humidity')
             outsideTemp = get_outside_temperature("Kosice")
             if outsideTemp is None:
                 outsideTemp = 0
@@ -25,6 +26,7 @@ def process_data(collectionName, payload):
             document = {
                 "outside": outsideTemp,
                 "inside": insideTemp,
+                "humidity": humidity,
                 "timestamp": int(now.timestamp()),
                 "datetime": now.strftime(MONGO_DATETIME_FORMAT),
             }
