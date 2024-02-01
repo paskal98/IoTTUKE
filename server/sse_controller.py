@@ -9,6 +9,7 @@ from flask_cors import CORS
 from mongo import process_data, get_socket_week_from_db
 from mqtt_client import message_queue, run_mqtt_client
 from services import get_outside_temperature
+from temperature_controller import register_temperature_routes
 
 import paho.mqtt.publish as publish
 
@@ -19,6 +20,7 @@ MQTT_PASSWORD = 'this.is.mqtt'
 
 app = Flask(__name__)
 CORS(app)
+register_temperature_routes(app)
 
 start_time = time.time()
 

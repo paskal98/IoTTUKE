@@ -14,6 +14,8 @@ def process_data(collectionName, payload):
     try:
         if collectionName == "Temperature":
             insideTemp = payload.get('temperature')
+            global LATEST_TEMPERATURE
+            LATEST_TEMPERATURE = insideTemp
             humidity = payload.get('humidity')
             outsideTemp = get_outside_temperature("Kosice")
             if outsideTemp is None:
