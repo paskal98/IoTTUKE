@@ -1,15 +1,11 @@
 from datetime import datetime
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
-
 from server.services import get_outside_temperature, monitor_temperature_condition
-
-uri = "mongodb+srv://danilbond49:maker@cluster0.6h6gsaf.mongodb.net/?retryWrites=true&w=majority"
-MONGO_DATETIME_FORMAT = "%d/%m/%Y %H:%M:%S"
-MONGO_DATE_FORMAT = "%d/%m/%Y"
+from attributes import *
 
 # Set the Stable API version when creating a new client
-client = MongoClient(uri, server_api=ServerApi('1'))
+client = MongoClient(MONGO_URI, server_api=ServerApi('1'))
 database = client.get_database("MQTTDB")
 
 def process_data(collectionName, payload):
