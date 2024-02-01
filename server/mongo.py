@@ -73,3 +73,15 @@ def get_inside_temp_from_db():
             return parameter_value
         else:
             return 0
+
+def get_humidity_from_db():
+    collection = database.get_collection("Temperature")
+    query = {}
+    sort_order = [("date", -1)]
+    latest_document = collection.find_one(query, sort=sort_order)
+    if latest_document:
+        parameter_value = latest_document.get("humidity")
+        if parameter_value is not None:
+            return parameter_value
+        else:
+            return 0
