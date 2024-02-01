@@ -8,12 +8,13 @@ def on_connect(client, userdata, flags, rc):
     print("Connected with result code " + str(rc))
     #client.subscribe("gateway/zigbee/socket")
     client.subscribe("gateway/zigbee/door sensor")
-    #client.subscribe("gateway/zigbee/temperature_humidity")
+    client.subscribe("gateway/zigbee/temperature_humidity")
 
 def on_message(client, userdata, msg):
     
     message = {'topic': msg.topic, 'payload': msg.payload.decode()}
     print("Received message:", json.dumps(message))
+    
     message_queue.put(json.dumps(message))
 
 def create_mqtt_client():
