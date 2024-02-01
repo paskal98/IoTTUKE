@@ -16,10 +16,10 @@ CORS(app)
 data = {
     "air": {
         "temperature": {
-            "inside": None,
+            "inside": 17,
             "outside": None
         },
-        "humidity": None,
+        "humidity": 20,
         "comfortRate": "Low"
     },
     "visitors": {
@@ -28,32 +28,32 @@ data = {
         "month": 677
     },
     "total": {
-        "usageElectricity": 0.0,
-        "moneySpent": 0.0
+        "usageElectricity": 322,
+        "moneySpent": 54.45
     },
     "computers": [
         {
             "name": 'PC1',
-            "usageTime": 3.4,
-            "usageLast": 0,
-            "usageElectricity": None,
-            "moneySpent": None
+            "usageTime": 123.3,
+            "usageLast": 5,
+            "usageElectricity": 0.5,
+            "moneySpent": 23.5
         }
     ],
     "switchables": [
         {
             "type": 'socket',
             "name": 'Smart Socket',
-            "identity": '1',
+            "identity": '№12',
             "usageTime": '1h 38min',
             "lastActivity": '1min'
         },
         {
             "type": 'lamp',
             "name": 'Smart Lightning',
-            "identity": '№0',
-            "usageTime": '0min',
-            "lastActivity": '0min'
+            "identity": '№1',
+            "usageTime": '3h 38min',
+            "lastActivity": '50min'
         }
     ],
     "settings": [
@@ -104,17 +104,12 @@ def sse_stream():
             payload = json.loads(payloadRaw)  # Deserialize payload if it's a JSON string
 
             data["air"]["temperature"]["outside"] = get_outside_temperature('Kosice')
-
             if topic == "gateway/zigbee/temperature_humidity":
                 data["air"]["temperature"]["inside"] = payload["temperature"]
                 data["air"]["humidity"] = payload["humidity"]
             if topic == "gateway/zigbee/socket":
-                data["computers"][0]["usageElectricity"] = payload["energy"]
-                data["computers"][0]["moneySpent"] = round((payload["energy"] * 0.55),2 )
-
-                data["total"]["usageElectricity"] = data["computers"][0]["usageElectricity"]
-                data["total"]["moneySpent"] = data["computers"][0]["moneySpent"]
-
+                data["total"]["usageElectricity"] = payload["energy"]
+                data["total"]["usageElectricity"] = payload["energy"]
 
             print(f"Data updated from topic: {topic}")  # Debugging
 
@@ -132,8 +127,6 @@ def sse_stream():
 @app.route('/rates')
 def stream():
     return Response(sse_stream(), content_type='text/event-stream')
-
-
 
 
 if __name__ == '__main__':
