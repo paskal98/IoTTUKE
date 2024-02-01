@@ -1,8 +1,8 @@
 import json
 import paho.mqtt.client as mqtt
 import queue
-
 from server.mongo import process_data
+from attributes import *
 
 # This queue will hold MQTT messages for SSE to consume
 message_queue = queue.Queue()
@@ -22,6 +22,18 @@ def on_message(client, userdata, msg):
         process_data("Temperature", payload_dict)
     elif "socket" in msg.topic:
         process_data("Socket", payload_dict)
+    elif "door" in msg.topic:
+        global DOOR_CLOSED
+        if payload_dict.get('contact') == True:
+            DOOR_CLOSED = True
+        else:
+            DOOR_CLOSED = False
+    elif "window" in msg.topic:
+        global WINDOW_CLOSED
+        if payload_dict.get('contact') == True:
+            WINDOW_CLOSED = True
+        else:
+            WINDOW_CLOSED = False
 
 
 def create_mqtt_client():
