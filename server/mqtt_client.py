@@ -5,6 +5,7 @@ from mongo import process_data
 from attributes import *
 from mongo import get_socket_week_from_db
 from datetime import datetime, time
+from services import send_slack_notification
 
 def is_more_than_6pm():
     current_time = datetime.now().time()
@@ -32,17 +33,22 @@ def on_message(client, userdata, msg):
     message_queue.put((msg.topic, msg.payload.decode()))
     payload_dict = json.loads(msg.payload)
     if "temperature" in msg.topic:
+        send_slack_notification("Close window. Temperature is too low")
         process_data("Temperature", payload_dict)
     elif "socket" in msg.topic:
         process_data("Socket", payload_dict)
     elif "door" in msg.topic:
         global DOOR_CLOSED
-        if payload_dict.get('contact') == True and is_more_than_6pm() and EVENING_TURN_OFF:
+        if payload_dict.get('contact') == True:
             DOOR_CLOSED = True
-            #turn off electricity
-        elif payload_dict.get('contact') == False and is_between_6am_and_6pm() and MORNING_TURN_ON:
+            if is_more_than_6pm() and EVENING_TURN_OFF:
+                print()
+                #turn off electricity
+        elif payload_dict.get('contact') == False:
             DOOR_CLOSED = False
-            #turn on electricity
+            if is_between_6am_and_6pm() and MORNING_TURN_ON:
+                print()
+                #turn on electricity
     elif "window" in msg.topic:
         global WINDOW_CLOSED
         if payload_dict.get('contact') == True:

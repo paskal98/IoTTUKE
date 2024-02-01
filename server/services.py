@@ -38,10 +38,12 @@ def shouldSendTemperatureAllert(outsideTemp, insideTemp, isWindowOpen, comfortTe
 
 
 def send_slack_notification(msg):
-    client = slack.WebClient(token=SLACK_BOT_API)
-    client.chat_postMessage(channel="#atomic-bomb", text=msg)
+    if shouldSendTemperatureAllert(get_outside_temperature(CITY), LATEST_TEMPERATURE, DOOR_CLOSED, COMFORT_TEMPERATURE):
+        client = slack.WebClient(token=SLACK_BOT_API)
+        client.chat_postMessage(channel="#atomic-bomb", text=msg)
 
-def monitor_temperature_condition(outsideTemp, insideTemp):
-    current_temperature = 30
-    if insideTemp < 20:
-        send_slack_notification("Temperature is too low. Windows may be opened")
+def set_comfort_temperature_service(comfort_temperature):
+    global COMFORT_TEMPERATURE
+    COMFORT_TEMPERATURE = comfort_temperature
+    print(COMFORT_TEMPERATURE)
+    send_slack_notification("Clouse window")
