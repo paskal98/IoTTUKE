@@ -1,8 +1,8 @@
 import {useEffect, useState} from 'react'
 import styles from './DeviceSwitchable.module.css';
-import socket from '../../../../assets/images/socket.png';
-import lamp from '../../../../assets/images/lamp.png';
-import def from '../../../../assets/images/default.png';
+import socket from '../../../../images/socket.png';
+import lamp from '../../../../images/lamp.png';
+import def from '../../../../images/default.png';
 import {Switch} from "@mui/material";
 
 function DeviceSwitchable({data}) {

@@ -67,6 +67,7 @@ function Dashboard({onPayload, data}) {
 
             <Temperature data={temperature}/>
             <Visitors data={visitors}/>
+            <Total data={total}/>
             {
                 computers.map((computer,index) => {
                     return (
@@ -74,7 +75,7 @@ function Dashboard({onPayload, data}) {
                     )
                 })
             }
-            <Total data={total}/>
+
 
         </div>
 
