@@ -2,6 +2,7 @@ import requests
 import slack
 from attributes import *
 
+
 def get_outside_temperature(city_name):
     base_url = "http://api.openweathermap.org/data/2.5/weather"
     params = {

@@ -6,9 +6,9 @@ import time
 from flask import Flask, Response
 from flask_cors import CORS
 
-from server.mongo import process_data
-from server.mqtt_client import message_queue, run_mqtt_client
-from server.services import get_outside_temperature
+from mongo import process_data, get_socket_week_from_db
+from mqtt_client import message_queue, run_mqtt_client
+from services import get_outside_temperature
 
 app = Flask(__name__)
 CORS(app)
@@ -96,7 +96,6 @@ data = {
     ]
 }
 
-
 def sse_stream():
     while True:
         try:
@@ -123,11 +122,13 @@ def sse_stream():
         time.sleep(3)
 
 
-
 @app.route('/rates')
 def stream():
     return Response(sse_stream(), content_type='text/event-stream')
 
+@app.route('/socket-info')
+def stream2():
+    return get_socket_week_from_db()
 
 if __name__ == '__main__':
     # Run MQTT client in its own thread

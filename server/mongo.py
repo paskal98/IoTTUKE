@@ -1,8 +1,9 @@
 from datetime import datetime
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
-from server.services import get_outside_temperature, monitor_temperature_condition
+from services import get_outside_temperature, monitor_temperature_condition
 from attributes import *
+from flask import jsonify
 
 # Set the Stable API version when creating a new client
 client = MongoClient(MONGO_URI, server_api=ServerApi('1'))
@@ -83,3 +84,22 @@ def get_humidity_from_db():
             return parameter_value
         else:
             return 0
+        
+def get_socket_week_from_db():
+    collection = database.get_collection("Socket")
+    result = collection.find().sort('date', -1).limit(7)
+    # Build a list of dictionaries containing the required information
+    socket_data = []
+    for idx, document in enumerate(result, 1):
+        consumed_energy = document.get("consumed_energy")
+        consumed_money = document.get("consumed_money")
+        date = document.get("date")
+        # Create a dictionary with the required fields
+        socket_entry = {
+            "id": idx,
+            "consumed_energy": consumed_energy,
+            "consumed_money": consumed_money,
+            "date": date
+        }
+        socket_data.append(socket_entry)
+    return jsonify(socket_data)
