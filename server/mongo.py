@@ -17,6 +17,7 @@ def process_data(collectionName, payload):
     try:
         if collectionName == "Temperature":
             insideTemp = payload.get('temperature')
+            humidity = payload.get('humidity')
             outsideTemp = get_outside_temperature("Kosice")
             if outsideTemp is None:
                 outsideTemp = 0
@@ -25,6 +26,7 @@ def process_data(collectionName, payload):
             document = {
                 "outside": outsideTemp,
                 "inside": insideTemp,
+                "humidity": humidity,
                 "timestamp": int(now.timestamp()),
                 "datetime": now.strftime(MONGO_DATETIME_FORMAT),
             }
@@ -69,6 +71,18 @@ def get_inside_temp_from_db():
     latest_document = collection.find_one(query, sort=sort_order)
     if latest_document:
         parameter_value = latest_document.get("inside")
+        if parameter_value is not None:
+            return parameter_value
+        else:
+            return 0
+        
+def get_humidity_from_db():
+    collection = database.get_collection("Temperature")
+    query = {}
+    sort_order = [("date", -1)]
+    latest_document = collection.find_one(query, sort=sort_order)
+    if latest_document:
+        parameter_value = latest_document.get("humidity")
         if parameter_value is not None:
             return parameter_value
         else:

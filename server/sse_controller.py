@@ -14,8 +14,7 @@ data = {
             "inside": 17,
             "outside": -3
         },
-        "humidity": 20,
-        "comfortRate": "Low"
+        "humidity": 20
     },
     "visitors": {
         "today": 23,
