@@ -4,6 +4,7 @@ import time
 from threading import Thread
 
 from flask_cors import CORS
+from services import send_slack_notification
 
 app = Flask(__name__)
 
@@ -96,9 +97,10 @@ def sse_stream():
         # mqqt requets
         # db requets
         # data seting up
-
+        send_slack_notification("Close Window")
         json_data = json.dumps(data)
         yield f"data:{json_data}\n\n"
+
         time.sleep(3)
 
 def register_sse_routes(app):
