@@ -31,9 +31,31 @@ function App() {
         setPage(page)
     }
 
-    function handlePayload(payload){
+    async function handlePayload(payload) {
+        console.log(payload);
 
+        const { state, identity } = payload;
+
+        const url = new URL(`http://localhost:4001/switch?identity=${identity}&state=${state}`);
+        url.search = new URLSearchParams({ identity, state }).toString();
+
+        try {
+
+            const response = await fetch(url);
+
+
+            if (!response.ok) {
+                throw new Error(`Request failed with status: ${response.status}`);
+            }
+
+            const data = await response.json();
+
+            console.log(data);
+        } catch (error) {
+            console.error("Error fetching data from /switch:", error.message);
+        }
     }
+
 
     useEffect(() => {
         const eventSource = new EventSource("http://localhost:4001/rates");

@@ -86,7 +86,7 @@ function Dashboard({onPayload, data}) {
             {
                 switchables.map((device,index) => {
                     return (
-                        <DeviceSwitchable key={index} data={device}/>
+                        <DeviceSwitchable key={index} data={device} onChange={onPayload}/>
                     )
                 })
             }

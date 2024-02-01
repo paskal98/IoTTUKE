@@ -5,18 +5,19 @@ import lamp from '../../../../images/lamp.png';
 import def from '../../../../images/default.png';
 import {Switch} from "@mui/material";
 
-function DeviceSwitchable({data}) {
+function DeviceSwitchable({data,onChange}) {
 
     const [value, setValue] = useState(null)
     const [checked, setChecked] = useState(false)
 
     useEffect(() => {
         setValue(data);
+        setChecked(data.isActive)
     }, [data]);
 
     function handleChange(checked){
         setChecked(checked)
-        console.log(checked)
+        onChange(checked,value.identity)
     }
 
 

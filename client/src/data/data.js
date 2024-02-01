@@ -54,7 +54,8 @@ export const dataPayload = {
             name: '-',
             identity: '-',
             usageTime: '-',
-            lastActivity: '-'
+            lastActivity: '-',
+            isActive: true
         }
     ],
     settings:[
