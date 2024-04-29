@@ -1,6 +1,6 @@
 # Project Description: Custom IoT Dashboard for Smart Environment Control and Analysis
 
-During a 24-hour hackathon, our team embarked on an ambitious project to design and prototype an innovative IoT dashboard. This dashboard is tailored to seamlessly integrate and manage a wide array of custom components, addressing the need for a flexible and adaptive solution in monitoring and controlling smart environments.
+Our team embarked on an ambitious project to design and prototype an innovative IoT dashboard. This dashboard is tailored to seamlessly integrate and manage a wide array of custom components, addressing the need for a flexible and adaptive solution in monitoring and controlling smart environments.
 
 ## Core Functionalities and Scenarios Addressed:
 
